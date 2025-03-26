@@ -7,8 +7,10 @@
         "Free Health Checks"
     ],
     "doctors": [
-        { "name": "Dr. Amina Mohammed", "specialty": "Pediatrics" },
-        { "name": "Dr. James Kariuki", "specialty": "General Surgery" },
-        { "name": "Dr. Wanjiku Njoroge", "specialty": "Emergency Medicine" }
+        { "id": 1, "name": "Dr. Amina Mohammed", "specialty": "Pediatrics", "availability": "Available" },
+        { "id": 2, "name": "Dr. James Kariuki", "specialty": "Surgery", "availability": "On Call" },
+        { "id": 3, "name": "Dr. Wanjiku Njoroge", "specialty": "Emergency", "availability": "Available" },
+        { "id": 4, "name": "Dr. Peter Mwangi", "specialty": "Cardiology", "availability": "Away" },
+        { "id": 5, "name": "Dr. Susan Akinyi", "specialty": "Oncology", "availability": "Available" }
     ]
 }
