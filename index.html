@@ -18,6 +18,20 @@
         <a href="#contact">Contact</a>
     </div>
 
+    <div class="section" id="add-doctor">
+        <h2>Add New Doctor</h2>
+        <form id="doctorForm">
+            <input type="text" id="doctorName" placeholder="Doctor Name" required>
+            <input type="text" id="specialty" placeholder="Specialty" required>
+            <select id="availability" required>
+                <option value="Available">Available</option>
+                <option value="On Call">On Call</option>
+                <option value="Away">Away</option>
+            </select>
+            <button type="submit">Add Doctor</button>
+        </form>
+    </div>
+
     <div class="section" id="services">
         <h2>Our Services</h2>
         <div id="services-list"></div>
