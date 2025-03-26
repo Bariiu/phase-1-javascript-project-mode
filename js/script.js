@@ -13,6 +13,7 @@ fetch('db.json')
                 <div class="doctor-card">
                     <h3>${doctor.name}</h3>
                     <p>Specialty: ${doctor.specialty}</p>
+                    <p>Availability: ${doctor.availability}</p>
                 </div>
             `;
         });
