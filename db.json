@@ -1,17 +1,17 @@
 {
     "services": [
-        "24/7 Emergency Care",
-        "Maternal Health",
-        "Pediatrics",
-        "General Surgery",
-        "Free Health Checks"
+      "24/7 Emergency Care",
+      "Maternal Health",
+      "Pediatrics",
+      "General Surgery",
+      "Free Health Checks"
     ],
     "doctors": [
-        { "id": 1, "name": "Dr. Amina Mohammed", "specialty": "Pediatrics", "availability": "Available" },
-        { "id": 2, "name": "Dr. James Kariuki", "specialty": "Surgery", "availability": "On Call" },
-        { "id": 3, "name": "Dr. Wanjiku Njoroge", "specialty": "Emergency", "availability": "Available" },
-        { "id": 4, "name": "Dr. Patrick Chiaji", "specialty": "Gynecologist", "availability": "Away" },
-        { "id": 5, "name": "Dr. Susan Akinyi", "specialty": "Oncology", "availability": "Available" }
+      { "id": 1, "name": "Dr. Amina Mohammed", "specialty": "Pediatrics", "availability": "Available" },
+      { "id": 2, "name": "Dr. James Kariuki", "specialty": "Surgery", "availability": "On Call" },
+      { "id": 3, "name": "Dr. Wanjiku Njoroge", "specialty": "Emergency", "availability": "Available" },
+      { "id": 4, "name": "Dr. Patrick Chiaji", "specialty": "Gynecologist", "availability": "Away" },
+      { "id": 5, "name": "Dr. Susan Akinyi", "specialty": "Oncology", "availability": "Available" }
     ],
-    "appointments":[]
-}
+    "appointments": []
+  }
