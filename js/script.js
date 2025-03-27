@@ -1,22 +1,63 @@
-fetch('db.json')
-    .then(response => response.json())
-    .then(data => {
-        let servicesHTML = "<ul>";
-        data.services.forEach(service => {
-            servicesHTML += `<li>${service}</li>`;
-        });
-        servicesHTML += "</ul>";
-        document.getElementById("services-list").innerHTML = servicesHTML;
-        let doctorsHTML = "";
-        data.doctors.forEach(doctor => {
-            doctorsHTML += `
-                <div class="doctor-card">
-                    <h3>${doctor.name}</h3>
-                    <p>Specialty: ${doctor.specialty}</p>
-                    <p>Availability: ${doctor.availability}</p>
-                </div>
-            `;
-        });
-        document.getElementById("doctors-list").innerHTML = doctorsHTML;
-    })
-    .catch(error => console.error('Error loading data:', error));
+const API = 'http://localhost:3000';
+
+document.addEventListener('DOMContentLoaded', init);
+document.getElementById('appointmentForm').addEventListener('submit', createAppointment);
+document.getElementById('doctorForm').addEventListener('submit', addDoctor);
+document.getElementById('doctors-list').addEventListener('click', handleDoctorActions);
+
+function init() {
+    let servicesData = null;
+    let doctorsData = null;
+    let requestsCompleted = 0;
+    let errorOccurred = false;
+  
+    function handleCompletion() {
+      if (requestsCompleted === 2 && !errorOccurred) {
+        document.getElementById('services-list').innerHTML = 
+          `<ul>${servicesData.map(s => `<li>${s}</li>`).join('')}</ul>`;
+        
+        document.getElementById('doctors-list').innerHTML = doctorsData.map(d => `
+          <div class="doctor-card" data-id="${d.id}">
+            <h3>${d.name} <span class="availability ${d.availability.replace(' ', '-')}">${d.availability}</span></h3>
+            <p>Specialty: ${d.specialty}</p>
+            <button class="delete-btn" data-action="delete">Delete</button>
+          </div>
+        `).join('');
+  
+        document.getElementById('doctor').innerHTML = doctorsData
+          .filter(d => d.availability === 'Available')
+          .map(d => `<option value="${d.id}">${d.name}</option>`);
+      }
+    }
+  
+    function handleError() {
+      if (!errorOccurred) {
+        errorOccurred = true;
+        alert('Error loading data');
+      }
+    }
+  
+    fetch(`${API}/services`)
+      .then(response => {
+        if (!response.ok) throw new Error('Service error');
+        return response.json();
+      })
+      .then(data => {
+        servicesData = data;
+        requestsCompleted++;
+        handleCompletion();
+      })
+      .catch(handleError);
+  
+    fetch(`${API}/doctors`)
+      .then(response => {
+        if (!response.ok) throw new Error('Doctors error');
+        return response.json();
+      })
+      .then(data => {
+        doctorsData = data;
+        requestsCompleted++;
+        handleCompletion();
+      })
+      .catch(handleError);
+  }
