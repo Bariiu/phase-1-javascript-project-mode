@@ -43,3 +43,37 @@ button {
 button:hover {
     background-color: darkgreen;
 }
+
+.availability {
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 17px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.Available { background-color: green; }
+.On-Call { background-color: orange; color: black; }
+.Away { background-color: red; }
+
+.delete-btn {
+    background-color: rgb(194, 43, 43);
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    background-color: maroon;
+}
+
+#doctorForm, #appointmentForm {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid gainsboro;
+}
