@@ -61,3 +61,27 @@ function init() {
       })
       .catch(handleError);
   }
+
+  function handleDoctorActions(e) {
+    const card = e.target.closest('.doctor-card');
+    if(!card) return;
+  
+    const id = card.dataset.id;
+    
+    if(e.target.dataset.action === 'delete') {
+      fetch(`${API}/doctors/${id}`, { method: 'DELETE' })
+        .then(() => card.remove())
+        .catch(error => console.error('Delete error:', error));
+    } else if(e.type === 'dblclick') {
+      const newStatus = card.querySelector('.availability').textContent === 'Available' ? 'Away' : 'Available';
+      fetch(`${API}/doctors/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ availability: newStatus })
+      })
+      .then(() => {
+        card.querySelector('.availability').textContent = newStatus;
+      })
+      .catch(error => console.error('Update error:', error));
+    }
+  }
