@@ -62,26 +62,65 @@ function init() {
       .catch(handleError);
   }
 
-  function handleDoctorActions(e) {
-    const card = e.target.closest('.doctor-card');
-    if(!card) return;
+function handleDoctorActions(e) {
+  const card = e.target.closest('.doctor-card');
+  if(!card) return;
+
+  const id = card.dataset.id;
   
-    const id = card.dataset.id;
-    
-    if(e.target.dataset.action === 'delete') {
-      fetch(`${API}/doctors/${id}`, { method: 'DELETE' })
-        .then(() => card.remove())
-        .catch(error => console.error('Delete error:', error));
-    } else if(e.type === 'dblclick') {
-      const newStatus = card.querySelector('.availability').textContent === 'Available' ? 'Away' : 'Available';
-      fetch(`${API}/doctors/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ availability: newStatus })
-      })
-      .then(() => {
-        card.querySelector('.availability').textContent = newStatus;
-      })
-      .catch(error => console.error('Update error:', error));
-    }
+  if(e.target.dataset.action === 'delete') {
+    fetch(`${API}/doctors/${id}`, { method: 'DELETE' })
+      .then(() => card.remove())
+      .catch(error => console.error('Delete error:', error));
+  } else if(e.type === 'dblclick') {
+    const newStatus = card.querySelector('.availability').textContent === 'Available' ? 'Away' : 'Available';
+    fetch(`${API}/doctors/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ availability: newStatus })
+    })
+    .then(() => {
+      card.querySelector('.availability').textContent = newStatus;
+    })
+    .catch(error => console.error('Update error:', error));
   }
+}
+
+function createAppointment(e) {
+  e.preventDefault();
+  const formData = {
+    patientName: e.target.name.value,
+    email: e.target.email.value,
+    date: e.target.date.value,
+    doctorId: e.target.doctor.value
+  };
+  
+  fetch(`${API}/appointments`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    alert('Appointment booked!');
+    e.target.reset();
+  })
+  .catch(error => console.error('Appointment error:', error));
+}
+
+function addDoctor(e) {
+  e.preventDefault();
+  const newDoctor = {
+    name: e.target.doctorName.value,
+    specialty: e.target.specialty.value,
+    availability: e.target.availability.value
+  };
+  
+  fetch(`${API}/doctors`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newDoctor)
+  })
+  .then(() => init())
+  .catch(error => console.error('Add doctor error:', error))
+  .finally(() => e.target.reset());
+}
