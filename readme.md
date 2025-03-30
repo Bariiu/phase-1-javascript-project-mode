@@ -30,5 +30,3 @@ A simple hospital website that:
    - Only shows available doctors
 
 ## Setup Instructions
-1. Install JSON-server :
-   npm install -g json-server
