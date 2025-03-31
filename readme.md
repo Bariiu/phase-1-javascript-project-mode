@@ -30,3 +30,4 @@ A simple hospital website that:
    - Only shows available doctors
 
 ## Setup Instructions
+   - Live link : https://bariiu.github.io/phase-1-javascript-project-mode/
